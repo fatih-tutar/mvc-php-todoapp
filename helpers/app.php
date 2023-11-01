@@ -11,6 +11,14 @@ function view($viewName, $pageData = []){
     else return false;
 }
 
+function model($modelName, $pageData = [], $data_process = null){
+    global $db;
+    if($data_process != null) $process = $data_process;
+    $data = $pageData;
+    if(file_exists(BASEDIR.'/model/'.$modelName.'.php')) return require BASEDIR.'/model/'.$modelName.'.php';
+    else return false;
+}
+
 function assets($assetName) {
     return file_exists(BASEDIR.'/public/'.$assetName) ? URL.'/public/'.$assetName : false;
 }
@@ -38,4 +46,13 @@ function post($index){
 
 function get($index){
     return isset($_GET[$index]) ? htmlspecialchars(trim($_GET[$index])) : false;
+}
+
+function redirect($link){
+    header('Location:'.URL.$link);
+}
+
+function url($url){
+    global $config;
+    return URL.'/'.$config['lang'].'/'.$url;
 }
