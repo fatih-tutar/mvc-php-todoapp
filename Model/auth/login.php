@@ -37,7 +37,7 @@ if($process == 'login') {
             'type' => 'success',
             'message' => 'Login successful',
             'data' => $user,
-            'redirect' => 'home'
+            'redirect' => '/home'
         ];
     }else{
         return [

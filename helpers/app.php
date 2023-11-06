@@ -60,3 +60,9 @@ function url($url){
     global $config;
     return URL.'/'.$config['lang'].'/'.$url;
 }
+
+function pre($data) {
+    echo "<pre style='background: #1d1d1d; color: greenyellow;  position: fixed; left: 30%; top: 25%; z-index:9999;'>";
+    print_r($data);
+    echo "</pre>";
+}

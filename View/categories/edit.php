@@ -26,20 +26,23 @@
           <div class="col-lg-12">
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add a new category</h3>
+                <h3 class="card-title">Edit the category</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <?= get_session('error') ? '<div class="alert alert-'.$_SESSION['error']['type'].'">'.$_SESSION['error']['message'].'</div>' : null ; ?>
+              <?php 
+                echo get_session('error') ? '<div class="alert alert-'.$_SESSION['error']['type'].'">'.$_SESSION['error']['message'].'</div>' : null ; 
+                if($_SESSION['error']) $_SESSION['error'] = null;
+              ?>
               <form action="" method="post"> 
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputCategoryTitle">Category Title</label>
-                    <input type="text" class="form-control" name="title" id="exampleInputCategoryTitle" placeholder="Enter the category title.">
+                    <input type="text" class="form-control" name="title" id="exampleInputCategoryTitle" placeholder="Enter the category title." value="<?= $data['title'] ?>">
                   </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="submit" value="1" class="btn btn-primary">Update</button>
                 </div>
               </form>
             </div>
