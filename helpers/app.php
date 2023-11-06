@@ -40,12 +40,16 @@ function get_cookie($index){
     return isset($_COOKIE[$index]) ? $_COOKIE[$index] : false;
 }
 
+function filter($field){
+    return is_array($field) ? array_map('filter',$field) : htmlspecialchars(trim($field));
+}
+
 function post($index){
-    return isset($_POST[$index]) ? htmlspecialchars(trim($_POST[$index])) : false;
+    return isset($_POST[$index]) ? filter($_POST[$index]) : false;
 }
 
 function get($index){
-    return isset($_GET[$index]) ? htmlspecialchars(trim($_GET[$index])) : false;
+    return isset($_GET[$index]) ? filter($_GET[$index]) : false;
 }
 
 function redirect($link){
