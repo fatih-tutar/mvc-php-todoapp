@@ -62,7 +62,7 @@ function url($url){
 }
 
 function pre($data) {
-    echo "<pre style='background: #1d1d1d; color: greenyellow;  position: fixed; left: 30%; top: 25%; z-index:9999;'>";
+    echo "<pre style='background: #1d1d1d; color: greenyellow;  position: absolut; left: 0; top: 0; z-index:9999;'>";
     print_r($data);
     echo "</pre>";
 }
