@@ -6,49 +6,18 @@ if (route(0) == 'categories' && !route(1)) {
 
     view('categories/home');
 
-}else if (route(0) == 'categories' && route(1) == 'list'){
-
-    $result = model('categories',[],'list');
-    view('categories/list', $result['data']);
-
 }else if (route(0) == 'todo' && route(1) == 'add'){
     
     $result = model('categories',[],'list');
     view('todo/add', $result['data']);
 
-}else if (route(0) == 'categories' && route(1) == 'remove' && is_numeric(route(2))){
+}else if (route(0) == 'todo' && route(1) == 'list'){
 
-    $result = model('categories',['id' => route(2)],'remove');
-    add_session('error',[
-        'message' => $result['message'] ?? '',
-        'type' => $result['type'] ?? ''            
-    ]);
+    $result = model('todo',[],'list');
+    view('todo/list', $result['data']);
 
-    if ($result['success'] == true) {
-        if(isset($result['redirect'])){
-            redirect($result['redirect']);
-        }
-    }
+}else if(route(0) == 'todo' && route(1) == 'edit' && is_numeric(route(2))){
 
-} else if(route(0) == 'categories' && route(1) == 'edit' && is_numeric(route(2))){
-
-    if(isset($_POST['submit'])){
-
-        $_SESSION['post'] = $_POST;
-        $title = post('title');
-        $result = model('categories',['id' => route(2), 'title' => $title],'edit');
-        add_session('error',[
-            'message' => $result['message'] ?? '',
-            'type' => $result['type'] ?? ''            
-        ]);
-        if($result['success'] == true) {
-            if(isset($result['redirect'])){
-                redirect($result['redirect']);
-            }
-        }
-
-    } else {
-        $result = model('categories',['id' => route(2)],'getsingle');
-        view('categories/edit', $result['data']);
-    }    
+    $result = model('todo',['id' => route(2)],'getsingle');
+    view('todo/edit', $result['data']);    
 }

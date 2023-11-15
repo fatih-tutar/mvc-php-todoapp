@@ -44,28 +44,39 @@
                   </div>
                   <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="Enter the todo title.">
+                    <input type="text" class="form-control" id="title" placeholder="Enter the todo title.">
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" name="description" id="description" placeholder="Enter the todo description.">
+                    <input type="text" class="form-control" id="description" placeholder="Enter the todo description.">
+                  </div>
+                  <div class="form-group">
+                    <label for="progress">Progress</label>
+                    <input type="range" class="form-control" id="progress" min="0" max="100">
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Select the status</label>
+                    <select class="form-control" id="status">
+                      <option value="a">Active</option>
+                      <option value="p">Passive</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="color">Select the color</label>
-                    <input type="color" class="form-control" name="color" id="color" value="#007bff">
+                    <input type="color" class="form-control" id="color" value="#007bff">
                   </div>
                   <div class="form-group">
                     <label for="start_date">Start Date</label>
                     <div class="row">
-                      <input type="date" class="form-control col-8" name="start_date" id="start_date">
-                      <input type="time" class="form-control col-4" name="start_date_time" id="start_date_time">
+                      <input type="date" class="form-control col-8" id="start_date">
+                      <input type="time" class="form-control col-4" id="start_date_time">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="end_date">End Date</label>
                     <div class="row">
-                      <input type="date" class="form-control col-8" name="end_date" id="end_date">
-                      <input type="time" class="form-control col-4" name="end_date_time" id="end_date_time">
+                      <input type="date" class="form-control col-8" id="end_date">
+                      <input type="time" class="form-control col-4" id="end_date_time">
                     </div>
                   </div>
                 </div>
@@ -104,6 +115,8 @@
     let description = document.getElementById('description').value;
     let category_id = document.getElementById('category_id').value;
     let color = document.getElementById('color').value;
+    let progress = document.getElementById('progress').value;
+    let status = document.getElementById('status').value;
     let start_date = document.getElementById('start_date').value;
     let end_date = document.getElementById('end_date').value;
     let start_date_time = document.getElementById('start_date_time').value;
@@ -115,6 +128,8 @@
     formData.append('description',description);
     formData.append('category_id',category_id);
     formData.append('color',color);
+    formData.append('progress',progress);
+    formData.append('status',status);
     formData.append('start_date',start_date);
     formData.append('end_date',end_date);
     formData.append('start_date_time',start_date_time);
