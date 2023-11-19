@@ -13,7 +13,7 @@
           <i class="fa fa-user"></i>
         </div>
         <div class="info">
-          <a href="url('profile')" class="d-block"><?= get_session('fullname') ?></a>
+          <a href="<?= url('profile') ?>" class="d-block"><?= get_session('fullname') ?></a>
         </div>
       </div>
 
