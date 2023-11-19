@@ -59,6 +59,7 @@
                     <select class="form-control" id="status">
                       <option value="a">Active</option>
                       <option value="p">Passive</option>
+                      <option value="w">Working</option>
                     </select>
                   </div>
                   <div class="form-group">

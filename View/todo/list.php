@@ -64,7 +64,7 @@
                         </div>
                       </td>
                       <td>
-                        <span class="badge bg-<?= $value['status'] == 'a' ? 'success' : 'secondary' ?>"><?= $value['status'] == 'a' ? 'Active' : 'Passive' ?></span>
+                        <span class="badge bg-<?= status($value['status'])['color'] ?>"><?= status($value['status'])['title'] ?></span>
                       </td>
                       <td>
                         <div class="btn-group btn-group-sm">

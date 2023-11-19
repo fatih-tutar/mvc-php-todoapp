@@ -18,119 +18,71 @@
   <?php view('static/sidebar'); ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper p-3">
+  <div class="content-wrapper p-2">
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+        <h5 class="mt-4 mb-2">Your Current Status <code><?= date('Y-m-d') ?></code></h5>
         <div class="row">
-          <div class="col-lg-4">
-            <h3>To Do</h3>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+          <?php foreach($data['todos'] as $item): ?>
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box bg-<?= status($item['status'])['color'] ?>">
+              <span class="info-box-icon"><i class="<?= status($item['status'])['icon'] ?>"></i></span>
 
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
+              <div class="info-box-content">
+                <span class="info-box-text"><?= status($item['status'])['title'] ?></span>
+                <span class="info-box-number"><?= $item['statusSum'] ?></span>
 
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <div class="progress">
+                  <div class="progress-bar" style="width: <?= $item['generalSum'] ?>%"></div>
+                </div>
+                <span class="progress-description">
+                <?= number_format($item['generalSum'],2) ?>%
+                </span>
               </div>
             </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
           </div>
-          <div class="col-lg-4">
-            <h3>Continue</h3>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-          </div>
-          <div class="col-lg-4">
-            <h3>Done</h3>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-          </div>
-          <!-- /.col-md-6 -->
+          <?php endforeach ?>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="timeline">
+              <?php foreach($data['workingTodos'] as $item): ?>
+              <div class="time-label">
+                <span class="bg-red"><?= date('d/m/Y',strtotime($item['start_date'])) ?></span>
+              </div>
+              <div>
+                <i class="fas fa-check" style="background-color:<?= $item['color'] ?>;"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i><?= date('H:i',strtotime($item['start_date'])) ?></span>
+                  <h3 class="timeline-header"><span class="badge bg-success"><?= $item['category_title'] ?></span> <?= $item['title'] ?></h3>
+                  <div class="timeline-body">
+                    <?= $item['description'] ?>
+                    <hr/>
+                    <?= $item['progress'].'%' ?>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-danger" style="width:<?= $item['progress'] ?>%;"></div>
+                    </div>
+                  </div>
+                  <div class="timeline-footer">
+                    <a href="<?= url('todo/edit/'.$item['id']) ?>" class="btn btn-primary btn-sm">Read more</a>
+                  </div>
+                </div>
+              </div>
+              <?php endforeach ?>
+              <div>
+                <i class="fas fa-clock bg-gray"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
   <?php view('static/footer'); ?>
 </div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="<?= assets('plugins/jquery/jquery.min.js') ?>"></script>
-<!-- Bootstrap 4 -->
 <script src="<?= assets('plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-<!-- AdminLTE App -->
 <script src="<?= assets('js/adminlte.min.js') ?>"></script>
 </body>
 </html>

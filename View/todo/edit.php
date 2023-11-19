@@ -60,6 +60,7 @@
                     <select class="form-control" id="status">
                       <option <?= $data['todos']['status'] == 'a' ? 'selected' : '' ?> value="a">Active</option>
                       <option <?= $data['todos']['status'] == 'p' ? 'selected' : '' ?> value="p">Passive</option>
+                      <option <?= $data['todos']['status'] == 'w' ? 'selected' : '' ?> value="w">Working</option>
                     </select>
                   </div>
                   <div class="form-group">
