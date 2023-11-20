@@ -102,45 +102,53 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   
-  const todo = document.getElementById('todo');
+  const profile = document.getElementById('profile');
+  const passwordChange = document.getElementById('passwordChange');
 
-  todo.addEventListener('submit', (event) => {
+  profile.addEventListener('submit', (event) => {
     
-    let title = document.getElementById('title').value;
-    let description = document.getElementById('description').value;
-    let category_id = document.getElementById('category_id').value;
-    let color = document.getElementById('color').value;
-    let progress = document.getElementById('progress').value;
-    let status = document.getElementById('status').value;
-    let start_date = document.getElementById('start_date').value;
-    let end_date = document.getElementById('end_date').value;
-    let start_date_time = document.getElementById('start_date_time').value;
-    let end_date_time = document.getElementById('end_date_time').value;
+    let name = document.getElementById('name').value;
+    let surname = document.getElementById('surname').value;
+    let email = document.getElementById('email').value;
 
     let formData = new FormData();
 
-    formData.append('title',title);
-    formData.append('description',description);
-    formData.append('category_id',category_id);
-    formData.append('color',color);
-    formData.append('progress',progress);
-    formData.append('status',status);
-    formData.append('start_date',start_date);
-    formData.append('end_date',end_date);
-    formData.append('start_date_time',start_date_time);
-    formData.append('end_date_time',end_date_time);
+    formData.append('name',name);
+    formData.append('surname',surname);
+    formData.append('email',email);
 
-    axios.post('<?= url('api/addtodo') ?>',formData).then(res => {
+    axios.post('<?= url('api/editprofile') ?>',formData).then(res => {
 
-      if(res.data.redirect){
-        window.location.href = res.data.redirect;
-      }else{
-        Swal.fire(
-          res.data.title,
-          res.data.msg,
-          res.data.status
-        );
-      }
+      Swal.fire(
+        res.data.title,
+        res.data.msg,
+        res.data.status
+      );
+      
+    }).catch(err => console.log(err))
+
+    event.preventDefault();
+  })
+
+  passwordChange.addEventListener('submit', (event) => {
+    
+    let currentPassword = document.getElementById('currentPassword').value;
+    let newPassword = document.getElementById('newPassword').value;
+    let confirmPassword = document.getElementById('confirmPassword').value;
+
+    let formData = new FormData();
+
+    formData.append('currentPassword',currentPassword);
+    formData.append('newPassword',newPassword);
+    formData.append('confirmPassword',confirmPassword);
+
+    axios.post('<?= url('api/changepassword') ?>',formData).then(res => {
+
+      Swal.fire(
+        res.data.title,
+        res.data.msg,
+        res.data.status
+      );
       
     }).catch(err => console.log(err))
 

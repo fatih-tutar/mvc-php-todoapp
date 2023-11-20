@@ -10,6 +10,7 @@
             <div class="card-body login-card-body">
             <p class="login-box-msg"><?= lang('loginText') ?></p>
             <?= get_session('error') ? '<div class="alert alert-'.$_SESSION['error']['type'].'">'.$_SESSION['error']['message'].'</div>' : null ; ?>
+            <?php if($_SESSION['error']) $_SESSION['error'] = null; ?>
             <form action="<?= URL.'/login' ?>" method="post">
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" value="<?= $_SESSION['post']['email'] ?? '' ?>" name="email" placeholder="<?= lang('emailText') ?>">

@@ -217,4 +217,105 @@ if (route(1) == 'addtodo') {
     $query->execute([get_session('id')]);
     $todos = $query->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($todos);
+} else if (route(1) == 'editprofile') {
+    $post = filter($_POST);
+
+    if (!$post['name'] || !$post['surname'] || !$post['email']) {
+
+        $status = 'error';
+        $title = 'Ops! Warning!';
+        $msg = 'Please fill in all fields!';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+
+    }
+
+    $query = $db->prepare("UPDATE users SET name=?, surname=?, email=? WHERE id = ? ");
+
+    $update = $query->execute([$post['name'], $post['surname'], $post['email'], get_session('id')]);
+
+    if(isset($update)){
+
+        $fullname = $post['name'].' '.$post['surname'];
+
+        add_session('name',$post['name']);
+        add_session('surname',$post['surname']);
+        add_session('fullname',$fullname);
+        add_session('email',$post['email']);
+
+        $status = 'success';
+        $title = 'Transaction successful';
+        $msg = 'Updated to your profile';
+        echo json_encode([
+            'status' => $status, 
+            'title' => $title, 
+            'msg' => $msg
+        ]);
+        exit();
+    }else{
+        $status = 'error';
+        $title = 'Operation failed';
+        $msg = 'An unexpected error occurred';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+    }
+} else if (route(1) == 'changepassword') {
+    $post = filter($_POST);
+
+    if (!$post['currentPassword'] || !$post['newPassword'] || !$post['confirmPassword']) {
+
+        $status = 'error';
+        $title = 'Ops! Warning!';
+        $msg = 'Please fill in all fields!';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+
+    }
+
+    if (md5($post['currentPassword']) != get_session('password')) {
+
+        $status = 'error';
+        $title = 'Ops! Warning!';
+        $msg = 'Your password is incorrect!';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+
+    }
+
+    if($post['newPassword'] != $post['confirmPassword']){
+
+        $status = 'error';
+        $title = 'Ops! Warning!';
+        $msg = 'Your passwords do not match!';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+
+    }
+
+    $newPassword = md5($post['newPassword']);
+
+    $query = $db->prepare("UPDATE users SET password=? WHERE id = ? ");
+
+    $update = $query->execute([$newPassword, get_session('id')]);
+
+    if(isset($update)){
+
+        add_session('password',$newPassword);
+
+        $status = 'success';
+        $title = 'Transaction successful';
+        $msg = 'Updated to your password';
+        echo json_encode([
+            'status' => $status, 
+            'title' => $title, 
+            'msg' => $msg
+        ]);
+        exit();
+    }else{
+        $status = 'error';
+        $title = 'Operation failed';
+        $msg = 'An unexpected error occurred';
+        echo json_encode(['status' => $status, 'title' => $title, 'msg' => $msg]);
+        exit();
+    }
 }
