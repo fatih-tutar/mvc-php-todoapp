@@ -4,17 +4,16 @@
 
 *This to-do application consists of login, dashboard, calendar, category add and list, and to-do add and list pages. Users log in through the login screen and can view their to-dos on a timeline on the dashboard page. Additionally, on the calendar page, users can see their to-dos on a visual calendar. In addition to these, categories can be added and deleted from the category add page, and to-dos can be added, deleted, and listed in the to-do page, with the data stored in the database.*
 
-- Theme used : AdminLTE https://adminlte.io/
-- Calendar used : FullCalendar https://fullcalendar.io/
-
 ## Application Features
 - Language Options
 - User Authentication
 - Session Management
 - Responsive Design with **Bootstrap**
-- User-Friendly Alerts with **SweetAlert**
+- User-Friendly Alerts with **[SweetAlert](https://sweetalert2.github.io/)**
 - Asynchronous Requests with **Axios**
 - Database Management with **MySQL**
+- Theme : **[AdminLTE](https://adminlte.io/)**
+- Calendar : **[FullCalendar](https://fullcalendar.io/)**
 
 ### Login
 <a href="https://ibb.co/LxG0Qtq"><img src="https://i.ibb.co/PcSrThb/Ekran-Resmi-2023-11-22-16-13-38.png" alt="Ekran-Resmi-2023-11-22-16-13-38" border="0"></a>
